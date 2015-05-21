@@ -24,10 +24,12 @@ use Drupal\user\UserInterface;
  *     "list_builder" = "Drupal\bottle\Entity\Controller\BottleListBuilder",
  *
  *     "form" = {
- *       "add" = "Drupal\bottle\Form\BottleForm",
- *       "edit" = "Drupal\bottle\Form\BottleForm",
- *       "delete" = "Drupal\bottle\Form\BottleDeleteForm",
+ *       "default" = "Drupal\bottle\Entity\Form\BottleForm",
+ *       "add" = "Drupal\bottle\Entity\Form\BottleForm",
+ *       "edit" = "Drupal\bottle\Entity\Form\BottleForm",
+ *       "delete" = "Drupal\bottle\Entity\Form\BottleDeleteForm",
  *     },
+ *     "access" = "Drupal\bottle\BottleAccessControlHandler",
  *   },
  *   base_table = "bottle",
  *   admin_permission = "administer bottle entity",
@@ -38,10 +40,13 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/bottle/{bottle}",
- *     "edit-form" = "/bottle/{bottle}/edit",
- *     "delete-form" = "/bottle/{bottle}/delete",
- *   }
+ *     "canonical" = "/entity.bottle.canonical",
+ *     "edit-form" = "/entity.bottle.edit_form",
+ *     "delete-form" = "/entity.bottle.delete_form",
+ *     "collection" = "/entity.bottle.collection"
+ *   },
+ *   field_ui_base_route = "bottle.settings"
+
  * )
  */
 class Bottle extends ContentEntityBase implements BottleInterface {
@@ -123,40 +128,43 @@ class Bottle extends ContentEntityBase implements BottleInterface {
       ->setDescription(t('Name of the Bottle entity.'))
       ->setSettings(array(
         'default_value' => '',
-        'max_length' => 255,
+        'max_length' => 50,
         'text_processing' => 0,
       ))
       ->setDisplayOptions('view', array(
         'label' => 'above',
         'type' => 'string',
-        'weight' => -6,
+        'weight' => -4,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string',
-        'weight' => -6,
+        'type' => 'string_textfield',
+        'weight' => -4,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('User Name'))
-      ->setDescription(t('Name of the associated user.'))
+      ->setLabel(t('Authored by'))
+      ->setDescription(t('The user ID of the Bottle entity author.'))
+      ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
+      ->setDefaultValueCallback('Drupal\node\Entity\Node::getCurrentUserId')
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', array(
-        'label' => 'above',
-        'type' => 'entity_reference',
-        'weight' => -3,
+        'label' => 'hidden',
+        'type' => 'author',
+        'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
         'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
         'settings' => array(
           'match_operator' => 'CONTAINS',
           'size' => 60,
           'autocomplete_type' => 'tags',
           'placeholder' => '',
         ),
-        'weight' => -3,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);

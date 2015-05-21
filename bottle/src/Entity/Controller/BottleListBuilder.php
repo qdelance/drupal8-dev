@@ -22,7 +22,7 @@ class BottleListBuilder extends EntityListBuilder {
   public function render() {
     $build['description'] = array(
       '#markup' => $this->t('Bottle Entity implements a bottle model. These bottles are fieldable entities. You can manage the fields on the <a href="@adminlink">Bottles admin page</a>.', array(
-        '@adminlink' => \Drupal::urlGenerator()->generateFromRoute('entity.bottle.settings'),
+        '@adminlink' => \Drupal::urlGenerator()->generateFromRoute('bottle.settings'),
       )),
     );
     $build['table'] = parent::render();

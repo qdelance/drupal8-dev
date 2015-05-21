@@ -5,7 +5,7 @@
  * Contains \Drupal\bottle\Form\BottleDeleteForm
  */
 
-namespace Drupal\bottle\Form;
+namespace Drupal\bottle\Entity\Form;
 
 use Drupal\Core\Entity\ContentEntityConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -49,7 +49,7 @@ class BottleDeleteForm extends ContentEntityConfirmFormBase {
         '@type' => $this->entity->bundle(),
         '%title' => $this->entity->label()
       ));
-    $form_state->setRedirect('entity.bottle.list');
+    $form_state->setRedirect('entity.bottle.collection');
   }
 
 }

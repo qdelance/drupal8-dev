@@ -1,11 +1,11 @@
-entity.bottle.settings:
+bottle.settings:
   title: 'Bottle Settings'
   description: 'Configure Bottle entity'
-  route_name: entity.bottle.settings
+  route_name: bottle.settings
   parent: system.admin_structure
 
-entity.bottle.list:
+entity.bottle.collection:
   title: 'Bottle Listing'
   description: 'List Bottles'
-  route_name: entity.bottle.list
+  route_name: entity.bottle.collection
 

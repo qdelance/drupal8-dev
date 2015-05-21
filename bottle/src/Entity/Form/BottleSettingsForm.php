@@ -4,7 +4,7 @@
  * Defines Drupal\bottle\Form\BottleSettingsForm
  */
 
-namespace Drupal\bottle\Form;
+namespace Drupal\bottle\Entity\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;

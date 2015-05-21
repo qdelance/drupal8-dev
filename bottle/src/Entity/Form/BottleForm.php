@@ -4,7 +4,7 @@
  * Definition of Drupal\bottle\Form\BottleForm
  */
 
-namespace Drupal\bottle\Form;
+namespace Drupal\bottle\Entity\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
@@ -46,7 +46,20 @@ class BottleForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-    $entity = $this->getEntity();
-    $entity->save();
+    $entity = $this->entity;
+    $status = $entity->save();
+
+    if ($status) {
+      drupal_set_message($this->t('Saved the %label Bottle.', array(
+        '%label' => $entity->label(),
+      )));
+    }
+    else {
+      drupal_set_message($this->t('The %label Bottle was not saved.', array(
+        '%label' => $entity->label(),
+      )));
+    }
+    $form_state->setRedirect('entity.bottle.edit_form', ['bottle' => $entity->id()]);
+
   }
 }
