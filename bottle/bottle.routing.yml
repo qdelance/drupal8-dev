@@ -1,0 +1,48 @@
+entity.bottle.canonical:
+  path: '/bottle/{bottle}'
+  defaults:
+    _entity_view: 'bottle'
+    _title: 'Bottle Content'
+  requirements:
+  # Calls the access controller of the entity, $operation 'view'
+    _entity_permission: 'bottle.view'
+
+entity.bottle.list:
+  path: '/bottle/list'
+  defaults:
+    _entity_list: 'bottle'
+    _title: 'Bottle List'
+  requirements:
+    _permission: 'view bottle entity'
+
+entity.bottle.add:
+  path: '/bottle/add'
+  defaults:
+    _entity_form: bottle.add
+    _title: 'Add Bottle'
+  requirements:
+    _entity_create_access: 'bottle'
+
+entity.bottle.edit_form:
+  path: '/bottle/{bottle}/edit'
+  defaults:
+    _entity_form: bottle.edit
+    _title: 'Edit Bottle'
+  requirements:
+    _entity_access: 'bottle.edit'
+
+entity.bottle.delete_form:
+  path: '/bottle/{bottle}/delete'
+  defaults:
+    _entity_form: bottle.delete
+    _title: 'Delete Bottle'
+  requirements:
+    _entity_access: 'bottle.delete'
+
+entity.bottle.settings:
+  path: 'admin/structure/settings'
+  defaults:
+   _form: '\Drupal\bottle\Form\BottleSettingsForm'
+   _title: 'Bottle Settings'
+  requirements:
+    _permission: 'administer bottle entity'

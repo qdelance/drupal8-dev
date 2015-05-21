@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Contains Drupal\bottle\bottle.module
+ */
+
+/**
+ * Implements hook_menu_link_defaults().
+ */
+/*function bottle_menu_link_defaults() {
+  $links = array();
+  $links['bottle.admin.structure.settings'] = array(
+    'link_title' => 'Bottle Settings',
+    'description' => 'Configure bottle entity',
+    'route_name' => 'bottle.settings',
+    'parent' => 'system.admin.structure',
+  );
+  $links['bottle.list'] = array(
+    'link_title' => 'Bottle Listing',
+    'description' => 'List Bottle content',
+    'route_name' => 'bottle.list',
+  );
+  return $links;
+}*/
+
+/**
+ * Implements hook_permission().
+ */
+function bottle_permission() {
+  return array(
+    'delete_bottle' => array(
+      'title' => t('Delete entity content.'),
+    ),
+    'add_bottle' => array(
+      'title' => t('Add entity content'),
+    ),
+    'view_bottle' => array(
+      'title' => t('View entity content'),
+    ),
+    'edit_bottle' => array(
+      'title' => t('Edit entity content'),
+    ),
+    'admin_bottle' => array(
+      'title' => t('Administer settings'),
+    ),
+  );
+}
+
+/**
+* Implements hook_theme.
+*/
+/*function bottle_theme() {
+  return array(
+    'bottle' => array(
+      'render element' => 'elements',
+      'template' => 'bottle',
+    ),
+  );
+}*/

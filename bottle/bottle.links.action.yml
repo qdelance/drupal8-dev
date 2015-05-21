@@ -1,0 +1,5 @@
+entity.bottle.add:
+  route_name: entity.bottle.add
+  title: 'Add Bottle'
+  appears_on:
+    - entity.bottle.list

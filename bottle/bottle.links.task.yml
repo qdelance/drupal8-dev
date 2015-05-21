@@ -1,0 +1,20 @@
+entity.bottle.settings_tab:
+  route_name: entity.bottle.settings
+  title: 'Settings'
+  base_route: entity.bottle.settings
+
+entity.bottle.canonical:
+  route_name: entity.bottle.canonical
+  base_route: entity.bottle.canonical
+  title: 'View'
+
+entity.bottle.page_edit:
+  route_name: entity.bottle.edit_form
+  base_route: entity.bottle.canonical
+  title: Edit
+
+entity.bottle.delete_confirm:
+  route_name: entity.bottle.delete_form
+  base_route: entity.bottle.canonical
+  title: Delete
+  weight: 10
