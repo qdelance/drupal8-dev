@@ -28,7 +28,7 @@ class BottleDeleteForm extends ContentEntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('entity.bottle.list');
+    return new Url('entity.bottle.collection');
   }
 
   /**

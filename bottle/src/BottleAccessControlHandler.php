@@ -36,7 +36,7 @@ class BottleAccessControlHandler extends EntityAccessControlHandler {
       case 'delete':
         return AccessResult::allowedIfHasPermission($account, 'delete bottle entity');
     }
-    return TRUE;
+    return AccessResult::allowed();;
   }
 
   /**
