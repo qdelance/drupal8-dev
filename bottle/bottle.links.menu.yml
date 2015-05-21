@@ -1,4 +1,4 @@
-bottle.settings:
+bottle.admin.structure.settings:
   title: 'Bottle Settings'
   description: 'Configure Bottle entity'
   route_name: bottle.settings

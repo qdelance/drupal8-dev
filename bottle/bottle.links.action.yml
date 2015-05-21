@@ -3,3 +3,4 @@ entity.bottle.add_form:
   title: 'Add Bottle'
   appears_on:
     - entity.bottle.collection
+    - entity.bottle.canonical

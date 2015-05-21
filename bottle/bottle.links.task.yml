@@ -1,7 +1,7 @@
-entity.bottle.settings_tab:
-  route_name: entity.bottle.settings
+bottle.settings_tab:
+  route_name: bottle.settings
   title: 'Settings'
-  base_route: entity.bottle.settings
+  base_route: bottle.settings
 
 entity.bottle.canonical:
   route_name: entity.bottle.canonical
