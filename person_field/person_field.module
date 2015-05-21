@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function person_field_theme() {
+  $theme['person_default'] = [
+    'variables' => array('forename' => NULL, 'surname' => NULL, 'age' => NULL),
+    'template' => 'person_default', 
+  ];
+  return $theme;
+}
+

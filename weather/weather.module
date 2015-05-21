@@ -1,0 +1,58 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function weather_theme() {
+  $theme['weather_help_page'] = [
+    'variables' => array('test_msg' => NULL),
+    'template' => 'weather-help-page', //weather-help-page.html.twig is loaded from templates sub directory, no need to rely on drupal_get_path anymore in D8 to organize templates
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_help().
+ */
+function weather_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.weather':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Weather module is an example module</p>');
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Custom block.') . '</dt>';
+      $output .= '<dd>' . t('Block displaying weather for a selected city') . '</dd>';
+      $output .= '<dt>' . t('Custom settings.') . '<dt>';
+      $output .= '<dd>' . t('Global settings for weather') . '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}
+
+
+/**
+ * Implements hook_help().
+ */
+// FIXME QDE: does not work when uncommented, no error in logs...
+/*function weather_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.weather':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Weather module provides etc etc <em>emphazise</em>. See the <a href="!block">Block module help</a> pages for general information on ...') . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Managing and displaying weather blocks') . '</dt>';
+      $output .= '<dd>' . t('TODO') . '</dd>';
+      $output .= '<dt>' . t('Accessing help') . '</dt>';
+      $output .= '<dd>' . t('TODO') . '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}*/
+
+

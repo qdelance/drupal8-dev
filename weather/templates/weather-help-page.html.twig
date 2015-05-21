@@ -1,0 +1,9 @@
+{# Twig comments #}
+<h2>Simple help page stored in a Twig template</h2>
+
+<p>The module provides a custom block<p>
+
+{# TODO: use url_generator service in the controller to set a $link value instead #}
+<p>Temperature unit is <a href="{{ url('weather.settings') }}">configured</a> globally.</p>
+
+<p>{{ test_msg }}</p>

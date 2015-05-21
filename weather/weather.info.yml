@@ -1,0 +1,10 @@
+name: Weather
+type: module
+description: 'Example module for block tests + settings + cron + API'
+package: Custom
+configure: weather.settings
+version: 8.x-1.0
+core: 8.x
+dependencies:
+  - node
+  - block

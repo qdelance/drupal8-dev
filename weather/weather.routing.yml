@@ -1,0 +1,24 @@
+weather.home:
+  path: '/weather'
+  defaults:
+    _controller: \Drupal\weather\Controller\WeatherController::content
+    _title: 'Display weather page'
+  requirements:
+    _permission: 'access content'
+
+weather.help_page:
+  path: '/weather-help-page'
+  defaults:
+    _controller: \Drupal\weather\Controller\WeatherController::helpPage
+    _title: 'Display weather help page'
+  requirements:
+    _permission: 'access content'
+
+weather.settings:
+  path: '/admin/config/weather'
+  defaults:
+    _form: \Drupal\weather\Form\WeatherSettingsForm
+    _title: 'Display weather settings'
+  requirements:
+    _permission: 'administer site configuration'
+

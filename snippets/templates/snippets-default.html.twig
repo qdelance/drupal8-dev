@@ -1,0 +1,6 @@
+{% if source_description %}
+  <div class="snippets-description">{{ source_description }}</div>
+{% endif %}
+{% if source_code %}
+  <pre><code class="{{ source_lang }}">{{ source_code }}</code></pre>
+{% endif %}

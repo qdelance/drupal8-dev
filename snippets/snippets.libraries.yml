@@ -1,0 +1,20 @@
+highlightjs:
+  version: 8.6
+  js:
+    highlightjs/highlight.pack.js: {}
+  css:
+  # SMACSS: base, layout, component, state or theme
+  # https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Asset!LibraryDiscoveryParser.php/function/LibraryDiscoveryParser%3A%3AparseLibraryInfo/8
+    component:
+      highlightjs/styles/default.css: {}
+
+snippets:
+  version: VERSION
+  js:
+    snippets.js: {}
+  css:
+    component:
+      snippets.css: {}
+  dependencies:
+    - core/drupal
+    - snippets/highlightjs

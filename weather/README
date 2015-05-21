@@ -1,0 +1,5 @@
+This modules provides : 
+ - a custom block "Weather block"
+ - a per block configuration element "city"
+ - a global configuration setting "unit" that can be configured in /admin/config/weather
+ - a fake help page /weather-help-page to have a basic example of Twig template loaded
