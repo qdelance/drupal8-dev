@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Sandwich module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function sandwich_theme() {
+  return [
+    'sandwich' => [
+      'variables' => [
+        'attributes' => [],
+        'name' => '',
+        'bread' => '',
+        'cheese' => '',
+        'veggies' => [],
+        'protein' => '',
+        'condiments' => [],
+      ],
+    ],
+  ];
+}
+
+function sandwich_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  $suggestions[] = 'sandwich__hardcoded';
+  $suggestions[] = 'abc';
+}
