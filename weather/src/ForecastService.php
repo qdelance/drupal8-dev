@@ -42,7 +42,7 @@ class ForecastService {
   public function __construct(Client $http_client, StateInterface $state, ConfigFactoryInterface $config_factory, $cache_lifetime) {
     $this->http_client = $http_client;
     $this->state = $state;
-    $this->config = $config_factory->get('weather');
+    $this->config = $config_factory->get('weather.settings');
     $this->cache_lifetime = $cache_lifetime;
   }
 
@@ -55,15 +55,38 @@ class ForecastService {
     if (isset($city) && $city != '') {
       // @todo Logger should be injected ?
       \Drupal::logger('weather')
-        ->info('Querying Open Weather Map API for city %city.',
+        ->info('Get forecast for city "%city".',
           array(
             '%city' => $city,
           ));
 
+      // First we are looking for data in cache
+      // We are NOT using Cache API to avoid hitting database (default)
+      // We are only relying to State API to keep things in memory
+      // Dunno if it's a good choice
+      // Anyway we have to store - for each city - 1 key for value + 1 key for cache time
+
+      $json = $this->state->get($city . '-value');
+      if ($json != NULL) {
+        \Drupal::logger('weather')
+          ->info('Data found in cache');
+        $cache_time = $this->state->get($city . '-life_time');
+        $current_time = time();
+        if (($current_time - $cache_time) > $this->cache_lifetime) {
+          \Drupal::logger('weather')
+            ->info('Data is too old, we\'ll have to refresh it');
+        } else {
+          \Drupal::logger('weather')
+            ->info('Data from the cache is OK');
+          return $json;
+        }
+      }
+
+      // Nothing in cache => we have to query the API
       $api_key = $this->config->get('openweathermap_apikey');
       $api_str = '';
 
-      if (!isset($city) || $city == '') {
+      if (!isset($api_key) || $api_key == '') {
         \Drupal::logger('weather')
           ->warning('No API key defined, you should configure one');
       }
@@ -71,10 +94,20 @@ class ForecastService {
         $api_str = '&APPID=' . $api_key;
       }
 
-      $request = $this->http_client->createRequest('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' . $city . '&units=metric' . $api_str);
-      $response = $this->http_client->send($request);
-      $json = $response->json();
+      try {
+        $request = $this->http_client->createRequest('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' . $city . '&units=metric' . $api_str);
+        $response = $this->http_client->send($request);
+        $json = $response->json();
 
+        if ($json != NULL) {
+          // Store in cache for future requests
+          $this->state->set($city . '-value', $json);
+          $this->state->set($city . '-life_time', time());
+        }
+      } catch (\Exception $e) {
+        \Drupal::logger('weather')
+          ->error('Exception during API call for city "$city": ' . $e->getMessage());
+      }
     }
     return $json;
   }
