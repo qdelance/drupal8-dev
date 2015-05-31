@@ -1,0 +1,8 @@
+services:
+  weather.forecast_service:
+    class: Drupal\weather\ForecastService
+    arguments: ['@http_client', '@state', '@config.factory', '%weather.cache_lifetime%']
+
+parameters:
+  # Cache weather for a city during cache_lifetime ms, default = 10 min = 10 * 60 * 1000
+  weather.cache_lifetime: 60000

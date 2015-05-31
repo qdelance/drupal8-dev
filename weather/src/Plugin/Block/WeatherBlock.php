@@ -38,18 +38,12 @@ class WeatherBlock extends BlockBase {
       $result = array(
         '#markup' => t('Display the weather for city <strong>@city</strong>', array ('@city' => $city)),
       );
-      $client = new Client();
 
-      $request = $client->createRequest('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' . $city . '&units=metric');
-      $response = $client->send($request);
-      $json = $response->json();
+      $forecast_service = \Drupal::service('weather.forecast_service');
+      $json = $forecast_service->getForecast($city);
 
       $weather = $json['weather'][0]['main'];
       $temp = $json['main']['temp'];
-      \Drupal::logger('weather')->info('Querying OpenWeatherMap API for city %city.',
-        array(
-          '%city' => $city,
-        ));
       $result[] = array(
         '#markup' => 'Temperature: ' . $temp . '&deg;C ; Weather: ' . $weather,
       );
